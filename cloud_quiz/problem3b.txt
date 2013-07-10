@@ -1,0 +1,30 @@
+---Problem 3b Join on chunk file 10 cluster
+
+register s3n://uw-cse-344-oregon.aws.amazon.com/myudfs.jar
+
+-- load the test file into Pig
+--raw = LOAD 's3n://uw-cse-344-oregon.aws.amazon.com/cse344-test-file' USING TextLoader as (line:chararray);
+-- later you will load to other files, example:
+raw = LOAD 's3n://uw-cse-344-oregon.aws.amazon.com/btc-2010-chunk-000' USING TextLoader as (line:chararray); 
+
+-- parse each line into ntriples
+ntriples = foreach raw generate FLATTEN(myudfs.RDFSplit3(line)) as (subject:chararray,predicate:chararray,object:chararray);
+
+
+--a  = filter ntriples by (subject matches '.*business.*');
+a  = filter ntriples by (subject matches '.*rdfabout\\.com.*');
+
+b  = foreach a generate subject as subject2,predicate as predicate2,object as object2 ;
+
+--joined = join a by subject, b by subject2;
+joined = join a by object, b by subject2;
+
+result = distinct joined PARALLEL 50;
+
+
+-- store the results in the folder /user/hadoop/problem3b-results
+--store result into 'problem3b-results' using PigStorage();
+store result into '/user/hadoop/problem3b-results' using PigStorage();
+-- Alternatively, you can store the results in S3, see instructions:
+-- store count_by_object_ordered into 's3n://superman/example-results';
+
