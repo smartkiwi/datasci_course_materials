@@ -1,12 +1,18 @@
 import oauth2 as oauth
 import urllib2 as urllib
 
+<<<<<<< HEAD
+# See Assginment 6 instructions or README for how to get these credentials
+access_token_key = "14149724-41z79LOCMcriN0WyqfXyc6h2jDKiAxbur8fViz2xz"
+access_token_secret = "R8Vmo07IokOZeh1vJtejTCcKfmyPFtluES9RVA337PY"
+=======
 # See Assignment 1 instructions or README for how to get these credentials
 access_token_key = "<Enter your access token key here>"
 access_token_secret = "<Enter your access token secret here>"
+>>>>>>> 205e29cfb37953d2ad4ee76c56e1b80849a389bb
 
-consumer_key = "<Enter consumer key>"
-consumer_secret = "<Enter consumer secret>"
+consumer_key = "ZMeNNSx1Vk6OH9FA48IVg"
+consumer_secret = "MTaYORsTVAYUYsPqw9SiGACUg4pWS4vQOMqQMC3kA"
 
 _debug = 0
 
